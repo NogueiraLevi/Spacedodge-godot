@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://bae4qeh0qkcvc"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_r78e6"]
+[ext_resource type="FontFile" uid="uid://bf1rhvr7sva0n" path="res://art/PressStart2P-Regular.ttf" id="2_0a48f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ap7w7"]
+font = ExtResource("2_0a48f")
+font_size = 40
+outline_size = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_u2ykf"]
+font = ExtResource("2_0a48f")
+font_size = 38
+font_color = Color(0.743276, 0.26628, 0.513134, 1)
+outline_size = 10
+shadow_color = Color(0.24711, 0.167, 0.47363, 1)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywy86"]
+bg_color = Color(0.476149, 0.589839, 0.886436, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_r78e6")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.057
+anchor_right = 0.5
+anchor_bottom = 0.057
+offset_left = -20.0
+offset_top = -20.04
+offset_right = 20.0
+offset_bottom = 19.96
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ap7w7")
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -11.5
+offset_right = 49.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Space Dodge"
+label_settings = SubResource("LabelSettings_u2ykf")
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.511
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -34.0
+offset_right = 28.72
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_0a48f")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/hover = SubResource("StyleBoxFlat_ywy86")
+text = "Start"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="StartButton" to="." method="on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
